@@ -97,6 +97,9 @@ class Fetch extends React.Component {
       .end(function (result) {
         if(result.status==400){
           alert("Sorry but these Airport doesn't exist in the Ariports list of the api please try some popular Airports")
+          self.setState({
+            DefaultSpace :"Search"
+          })
         }
         else{
         var sessionkey = result.headers.location.substr(64, 36);
