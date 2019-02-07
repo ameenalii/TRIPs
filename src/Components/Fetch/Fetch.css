@@ -21,19 +21,6 @@
 
   }
   
-  /* .te {
-    border: 10px solid rgba(116, 79, 1, 0.685);
-    height: 50px;
-    border-radius: 10px;
-    margin-left: 1px;
-  } */  
-/* .buts{
-    border: 3px solid rgba(116, 79, 1, 0.685);
-    /* height: 50px; 
-    border-radius: 10px;
-    margin-left: 1px;
-    display: flex;
-  } */
   .button {
     background: rgba(116, 79, 1, 0.685);
     color: #FFF;
@@ -148,11 +135,29 @@
   /* justify-content: space-around;
   align-items: stretch; */
 }
-/* #price{
-  font-size: 15px;
-} */
+
 #select{
   width: 100px;
   padding: 10px;
   margin: 5px;
+}
+.eContainer{
+  display: flex;
+  flex-direction: column;
+
+}
+
+#ErrorMessage,#errorbutton{
+  margin: auto;
+
+
+}
+#errorbutton{
+  width: 100px;
+  padding: 10px;
+}
+#ErrorMessage{
+  text-align: center;
+  padding: 50px
+
 }

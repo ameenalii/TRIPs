@@ -75,15 +75,15 @@ class Fetch extends React.Component {
 
     //fetch the date from the api  
     fetchTheData(callback){
-        this.setState({
-          DefaultSpace :"Loading....."
-        })
       var self =this;
       if(this.state.originPlace =="" || this.state.destinationPlace == ""){
         alert('please insert origin and destination place fields')
 
       }
       else{
+        this.setState({
+          DefaultSpace :"Loading....."
+        })
       unirest.post("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0")
       .header("X-RapidAPI-Key", "dde53a9062msh03e3f34724e422bp1c2542jsn9c9d6e846969")
       .header("Content-Type", "application/x-www-form-urlencoded")
@@ -95,8 +95,12 @@ class Fetch extends React.Component {
       .send(`outboundDate=${this.state.outboundDate}`)
       .send("adults=1")
       .end(function (result) {
+        if(result.status==400){
+          alert("Sorry but these Airport doesn't exist in the Ariports list of the api please try some popular Airports")
+        }
+        else{
         var sessionkey = result.headers.location.substr(64, 36);
-        self.showmessage();
+        // self.showmessage();
 
       fetch(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/uk2/v1.0/${sessionkey}?pageIndex=0&pageSize=10`, { 
 
@@ -105,7 +109,7 @@ class Fetch extends React.Component {
       } })
       .then(res => res.json())
       .then((data)=>{
-        console.log(data);
+        // console.log(data);
         self.setState({
           PricingData: data
         })
@@ -113,8 +117,9 @@ class Fetch extends React.Component {
         callback();
 
           })
-      })
+       } })
     }
+  
   }
 
     //get the date and set it to the state
@@ -163,8 +168,19 @@ class Fetch extends React.Component {
 
         let Agents= this.state.PricingData.Agents.map((item, i)=>{
           return ( item.ImageUrl )})
+           if(this.state.PricingData.Itineraries.length == 0){
+            return (
+            <div className="eContainer">
+              <h1  id="ErrorMessage">Sorry there is no Trip at this Date try another Date or Place Now </h1>
+              <button onClick={()=>{this.togglePopup()}} id="errorbutton" >Close</button>
+            </div>
+              )
 
+
+          }
+            else{
       return(
+        
         price.map((item, i)=>{
           return(
           <div className="container"> 
@@ -179,7 +195,7 @@ class Fetch extends React.Component {
         )
       }))           
 }
-
+}
     render(){
       return(<Bulk.Consumer>{(app)=>{
         console.log(this.state)
