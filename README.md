@@ -22,6 +22,6 @@ npm run server
 
 #####- You can see the Live Demo for it from the link below
 
-Live Demo : http://croczitrip.surge.sh/
+Live Demo : http://croczitripper.surge.sh/
 
 
