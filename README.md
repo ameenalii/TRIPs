@@ -1,5 +1,5 @@
 #TRIPs
-it's an trip pack app that get data 
+it's a trip pack app that get data 
 of trips from skyscanner data and show it to the user
 after search the Origin and Destination place to the trip
 
